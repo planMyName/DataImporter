@@ -13,13 +13,17 @@ export interface ImportSchemaModel {
     schemaHeaders?: SchemaHeader[]
 }
 
-export const ProcessInputFileForSchems = async (migrationDetails: DataMigrationDetails): Promise<ImportSchemaModel> => {
+export const ProcessInputFileForSchems = async (migrationDetails?: DataMigrationDetails): Promise<ImportSchemaModel | undefined> => {
+    if (!migrationDetails) {
+        return undefined
+    }
+
     const schema: any = await axios.get<ImportSchemaModel>(`${baseApiUrl}/api/v1/schema/importschemamodel`, {
         params: {
             fileId: migrationDetails.id,
-            migrationeType: migrationDetails.type
+            migrationType: migrationDetails.type
         }
     })
 
-    return schema
+    return schema.data
 }

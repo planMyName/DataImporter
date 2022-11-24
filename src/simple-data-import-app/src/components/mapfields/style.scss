@@ -10,13 +10,7 @@
         .field-mapping {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-
-            .field-mapping__input {
-                width: 500px;
-            }
+            height: 40px;
         }
     }
 

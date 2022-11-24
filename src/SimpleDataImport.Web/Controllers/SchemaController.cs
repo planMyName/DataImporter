@@ -14,13 +14,13 @@ namespace SimpleDataImport.Web.Controllers
     public class SchemaController : ControllerBase
     {
         private readonly ILogger<SchemaController> _logger;
-        private readonly IObjectCache<Stream> _fileCache;
+        private readonly IObjectCache<byte[]> _fileCache;
         private readonly IInputFileSchemaExtractor _inputFileSchemaExtractor;
         private readonly IHostingEnvironment _environment;
         private readonly IMapper _mapper;
 
         public SchemaController(ILogger<SchemaController> logger,
-            IObjectCache<Stream> fileCache,
+            IObjectCache<byte[]> fileCache,
             IInputFileSchemaExtractor inputFileSchemaExtractor,
             IHostingEnvironment environment,
             IMapper mapper)
@@ -34,9 +34,11 @@ namespace SimpleDataImport.Web.Controllers
 
         [HttpGet]
         [Route("importschemamodel")]
-        public async Task<ImportSchemaModelDetail> GetImportSchemaModelAsync(string fileId, string migrationType)
+        public async Task<ImportSchemaModelDetail> GetImportSchemaModelAsync([FromQuery]string fileId, [FromQuery]string migrationType)
         {
-            var inputFileStream = await _fileCache.GetBinaryAsync(fileId);
+            var bytes = await _fileCache.GetBinaryAsync(fileId);
+
+            using var inputFileStream = new MemoryStream(bytes);
 
             var inputSchemaHeaders = _inputFileSchemaExtractor.ExtractSchema(inputFileStream);
 

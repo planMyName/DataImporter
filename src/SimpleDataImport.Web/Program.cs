@@ -21,7 +21,7 @@ var mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new MappingProfile());
 });
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
-builder.Services.AddSingleton<IObjectCache<Stream>, InMemoryCache<Stream>>();
+builder.Services.AddSingleton<IObjectCache<byte[]>, InMemoryCache<byte[]>>();
 builder.Services.AddTransient<IInputFileSchemaExtractor, InputFileSchemaExtractor>();
 
 builder.Services.AddCors(options =>

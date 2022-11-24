@@ -9,12 +9,13 @@ namespace SimpleDataImport.Web.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        private readonly IObjectCache<Stream> _fileCache;
+        private readonly IObjectCache<byte[]> _fileCache;
 
-        public FileController(IObjectCache<Stream> fileCache)
+        public FileController(IObjectCache<byte[]> fileCache)
         {
             _fileCache = fileCache;
         }
+        
         // GET: api/<FileController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,14 +32,14 @@ namespace SimpleDataImport.Web.Controllers
                 return BadRequest();
             }
 
-            var stream = await _fileCache.GetBinaryAsync(fileId);
+            var bytes = await _fileCache.GetBinaryAsync(fileId);
 
-            if (stream == null)
+            if (bytes == null)
             {
                 return NotFound();
             }
 
-            return File(stream, "application/octet-stream");
+            return File(bytes, "application/octet-stream");
         }
 
         // POST api/<FileController>
@@ -53,7 +54,7 @@ namespace SimpleDataImport.Web.Controllers
             using var stream = new MemoryStream();
             await file.CopyToAsync(stream);
 
-            await _fileCache.SetBinaryAsync(fileId, stream, TimeSpan.FromDays(1));
+            await _fileCache.SetBinaryAsync(fileId, stream.ToArray(), TimeSpan.FromDays(1));
 
             return Ok();
         }
