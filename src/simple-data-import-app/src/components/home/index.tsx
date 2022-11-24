@@ -12,7 +12,7 @@ const initialPanel: Panel<SelectInputPanelInfo> = {
   props: {
   },
   renderPanel: SelectInputPanel,
-  title: "Select Input"
+  title: "Step 1: Select Input"
 };
 
 export interface HomeProps {}
@@ -30,12 +30,11 @@ export const Home: React.FC<HomeProps> = props => {
 
   return (
     <div className="home">
-      <p>helloworld!!!</p>
           <PanelStack2
               className="panel-stack"
               onOpen={addToPanelStack}
               onClose={removeFromPanelStack}
-              renderActivePanelOnly={true}
+              renderActivePanelOnly={false}
               showPanelHeader={true}
               stack={currentPanelStack}
           />

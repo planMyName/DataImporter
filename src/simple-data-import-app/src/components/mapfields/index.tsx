@@ -1,17 +1,51 @@
-import { PanelProps } from '@blueprintjs/core'
+import { Button, PanelProps, Intent } from '@blueprintjs/core'
+import React from 'react';
+import { DataMigrationDetails } from '../../models/DataMigrationDetails';
+import { EditDataPanel } from '../editdata';
 
-export interface MapFieldsPanelInfo {}
+import './style.scss';
+
+export interface MapFieldsPanelInfo {
+  migrationDetails?: DataMigrationDetails
+}
 
 export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props => {
 
-  const onFileSelectionChange = () => {
-    console.log('File input changed');
-    // enable next page button
-  }
+  const [isNextPageAllowed, setIsNextPageAllowed] = React.useState<boolean>(true)
+
+  const onNextPageClick = React.useCallback(() => {
+    if (props.migrationDetails !== undefined) {
+      // api call to get all schema detail to pass to next panel
+      props.openPanel({
+        props: {
+          migrationDetails: props.migrationDetails
+        },
+        renderPanel: EditDataPanel,
+        title: "Step 3: Inspect & Edit Data"
+      })
+    }
+  }, [props])
   
   return (
     <div className="map-fields">
-      Map Fields data here
+      <p>
+        Map the fields of the input file to data field of in Smokeball system.
+      </p>
+      <div className="field-mappings">
+        <div className="field-mapping">
+          Field 1, Field 2
+        </div>
+        <div className="field-mapping">
+          Field 3, Field 4
+        </div>
+      </div>
+      <Button
+        disabled={!isNextPageAllowed}
+        onClick={onNextPageClick}
+        text="Next: Edit Data"
+        rightIcon="arrow-right"
+        intent={Intent.PRIMARY}
+      />
     </div>
   );
 }

@@ -13,4 +13,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleDataImport.Core.Abstraction\SimpleDataImport.Core.Abstraction.csproj" />
+    <ProjectReference Include="..\SimpleDataImport.Core\SimpleDataImport.Core.csproj" />
+  </ItemGroup>
+
 </Project>
