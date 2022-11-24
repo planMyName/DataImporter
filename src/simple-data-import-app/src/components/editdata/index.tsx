@@ -1,7 +1,13 @@
 import { PanelProps } from '@blueprintjs/core'
-import { ProcessInputFileForSchems } from '../../api/schema/schemaApi';
+import { DataMigrationDetails } from '../../models/DataMigrationDetails';
+import { ReactGrid, Column, Row } from "@silevis/reactgrid";
+import "@silevis/reactgrid/styles.css";
 
-export interface EditDataPanelInfo {}
+import './style.scss'
+
+export interface EditDataPanelInfo {
+  migrationDetails?: DataMigrationDetails
+}
 
 export const EditDataPanel: React.FC<PanelProps<EditDataPanelInfo>> = props => {
 

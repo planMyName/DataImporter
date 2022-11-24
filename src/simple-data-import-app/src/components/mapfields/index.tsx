@@ -2,19 +2,13 @@ import { Button, PanelProps, Intent, Position, MenuItem } from '@blueprintjs/cor
 import { ItemPredicate, ItemRenderer, Select2 } from '@blueprintjs/select';
 import React, { useEffect } from 'react';
 import { ImportSchemaModel, ProcessInputFileForSchems, SchemaHeader } from '../../api/schema/schemaApi';
-import { DataMigrationDetails } from '../../models/DataMigrationDetails';
+import { DataMigrationDetails, InputToSchemaMap } from '../../models/DataMigrationDetails';
 import { EditDataPanel } from '../editdata';
 
 import './style.scss';
 
 export interface MapFieldsPanelInfo {
   migrationDetails?: DataMigrationDetails
-}
-
-export interface InputToSchemaMap {
-  inputHeader: SchemaHeader,
-  schemaHeader: SchemaHeader
-  index: number
 }
 
 const filterHeader: ItemPredicate<SchemaHeader> = (query, header, _index, exactMatch) => {
@@ -56,7 +50,7 @@ export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props =>
       // api call to get all schema detail to pass to next panel
       props.openPanel({
         props: {
-          migrationDetails: props.migrationDetails
+          migrationDetails: {...props.migrationDetails, inputToSchemaMaps: inputToSchemaMaps}
         },
         renderPanel: EditDataPanel,
         title: "Step 3: Inspect & Edit Data"
