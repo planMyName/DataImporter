@@ -1,7 +1,7 @@
 import { Button, PanelProps, Intent } from '@blueprintjs/core'
 import React from 'react';
 import { useAsync } from 'react-use';
-import { ProcessInputFileForSchems } from '../../api/schema/schemaApi';
+import { ImportSchemaModel, ProcessInputFileForSchems } from '../../api/schema/schemaApi';
 import { DataMigrationDetails } from '../../models/DataMigrationDetails';
 import { EditDataPanel } from '../editdata';
 
@@ -13,6 +13,7 @@ export interface MapFieldsPanelInfo {
 
 export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props => {
 
+  const [schemaModel, setSchemaModel] = React.useState<ImportSchemaModel>()
   const [isNextPageAllowed, setIsNextPageAllowed] = React.useState<boolean>(true)
 
   const importSchemaModel = useAsync(ProcessInputFileForSchems, [props.migrationDetails])
@@ -29,7 +30,11 @@ export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props =>
       })
     }
   }, [props])
-  
+
+  if (importSchemaModel.loading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="map-fields">
       <p>
@@ -37,10 +42,14 @@ export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props =>
       </p>
       <div className="field-mappings">
         <div className="field-mapping">
-          Field 1, Field 2
+          {
+            schemaModel?.inputHeaders?.map((schema, index) => (<span>{schema.name}</span>))
+          }
         </div>
         <div className="field-mapping">
-          Field 3, Field 4
+          {
+            schemaModel?.schemaHeaders?.map((schema, index) => (<span>{schema.name}</span>))
+          }
         </div>
       </div>
       <Button
