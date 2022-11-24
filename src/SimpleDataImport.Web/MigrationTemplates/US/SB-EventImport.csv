@@ -1,0 +1,11 @@
+External EventID,External MatterID,External AttendeeIDs,Start DateTimeOffset,End DateTimeOffset,All Day,Subject,Location,Comments
+1,30,Closings,2020-10-01 11:15 +10:00,2020-10-01 11:30 +10:00,0,Event 1 - Oct 1 @ 11:15-11:30,,Test comments
+2,30,Closings,2020-10-01 09:00 +10:00,2020-10-01 12:00 +10:00,0,Event 2 - Oct 1 @ 09am-12pm,Zoom,
+3,30,JBL2@SmokeballLawyers.com&AC@SmokeballLawyers.com,2020-10-01 00:00 +10:00,2020-10-01 00:00 +10:00,1,All Day Event 3 on Oct 1,,Important meeting
+4,30,AC@SmokeballLawyers.com,2020-10-02 14:30 +10:00,2020-10-02 15:30 +10:00,0,Event 4 - Oct 2 @ 2:30pm-3:30pm,Office,
+5,30,AC@SmokeballLawyers.com&JBL2@SmokeballLawyers.com,2020-10-05 11:00 +11:00,2020-10-05 11:15 +11:00,0,Event 5 - Oct 5 @ 11am-11:15am,,
+6,247,JBL2@SmokeballLawyers.com,2020-10-06 13:30 +11:00,2020-10-06 15:30 +11:00,0,Event 6 - Oct 6 @ 1:30pm-3:30pm,Meeting Room,ABC
+7,247,JBL2@SmokeballLawyers.com,2020-10-06 00:00 +11:00,2020-10-06 00:00 +11:00,1,All Day Event 7 - Oct 6,,Reall really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really long comment
+8,247,AC@SmokeballLawyers.com,2020-10-08 08:45 +11:00,2020-10-08 08:50 +11:00,0,Event 8 - Oct 8 @ 8:45am-8:50am,Client,
+9,,JBL2@SmokeballLawyers.com,2020-10-08 09:00 +11:00,2020-10-08 10:00 +11:00,0,Event 9 - Oct 8 @ 9am-10am,,DEF
+10,,Closings,2020-10-09 00:00 +11:00,2020-10-09 00:00 +11:00,1,All Day Event 10 - Oct 9,789-111-000,

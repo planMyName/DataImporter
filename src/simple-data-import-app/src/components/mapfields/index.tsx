@@ -1,5 +1,7 @@
 import { Button, PanelProps, Intent } from '@blueprintjs/core'
 import React from 'react';
+import { useAsync } from 'react-use';
+import { ProcessInputFileForSchems } from '../../api/schema/schemaApi';
 import { DataMigrationDetails } from '../../models/DataMigrationDetails';
 import { EditDataPanel } from '../editdata';
 
@@ -12,6 +14,8 @@ export interface MapFieldsPanelInfo {
 export const MapFieldsPanel: React.FC<PanelProps<MapFieldsPanelInfo>> = props => {
 
   const [isNextPageAllowed, setIsNextPageAllowed] = React.useState<boolean>(true)
+
+  const importSchemaModel = useAsync(ProcessInputFileForSchems, [props.migrationDetails])
 
   const onNextPageClick = React.useCallback(() => {
     if (props.migrationDetails !== undefined) {

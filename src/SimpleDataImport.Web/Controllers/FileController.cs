@@ -24,14 +24,26 @@ namespace SimpleDataImport.Web.Controllers
 
         // GET api/<FileController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetAsync(string fileId)
         {
-            return "value";
+            if (string.IsNullOrEmpty(fileId))
+            {
+                return BadRequest();
+            }
+
+            var stream = await _fileCache.GetBinaryAsync(fileId);
+
+            if (stream == null)
+            {
+                return NotFound();
+            }
+
+            return File(stream, "application/octet-stream");
         }
 
         // POST api/<FileController>
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]string fileId, [FromBody] IFormFile file)
+        public async Task<IActionResult> PostAsync([FromForm]string fileId, [FromForm] IFormFile file)
         {
             if (string.IsNullOrEmpty(fileId) || file == null || file.Length <= 0)
             {

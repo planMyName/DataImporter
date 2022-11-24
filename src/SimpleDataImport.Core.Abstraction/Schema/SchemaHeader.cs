@@ -1,4 +1,4 @@
-﻿namespace SimpleDataImport.Web.Models;
+﻿namespace SimpleDataImport.Core.Abstraction.Schema;
 
 public class SchemaHeader
 {

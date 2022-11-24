@@ -1,0 +1,10 @@
+External TaskID,External MatterID,Status,Created Date,Due Date,Name,Created Staff Email,Assigned Staff Email,Task Text
+1,30,0,2020-10-01,2020-10-03,Imported Task 1,AC@SmokeballLawyers.com,AC@SmokeballLawyers.com,Send letter
+2,30,0,2020-10-02,2020-10-04,Imported Task 2,JBL2@SmokeballLawyers.com,JBL2@SmokeballLawyers.com,Send email
+3,30,0,2020-10-03,2020-10-05,Imported Task 3,JBL2@SmokeballLawyers.com,JBL2@SmokeballLawyers.com,Follow up
+4,30,1,2020-10-04,2020-10-06,Imported Task 4,AC@SmokeballLawyers.com,AC@SmokeballLawyers.com,Print document
+4,30,1,2020-10-05,2020-10-07,Imported Task 5,AC@SmokeballLawyers.com,AC@SmokeballLawyers.com,Send invoice
+5,247,0,2020-10-06,2020-10-08,Imported Task 6,JBL2@SmokeballLawyers.com,JBL2@SmokeballLawyers.com,Pay bill
+5,247,1,2020-10-07,2020-10-09,Imported Task 7,JBL2@SmokeballLawyers.com,JBL2@SmokeballLawyers.com,Title search
+6,,0,2020-10-08,2020-10-10,Imported Task 8,AC@SmokeballLawyers.com,AC@SmokeballLawyers.com,Some really really really really really long Task text
+7,,1,2020-10-09,2020-10-11,Imported Task 9,JBL2@SmokeballLawyers.com,JBL2@SmokeballLawyers.com,Another Task that isn't assigned to a matter

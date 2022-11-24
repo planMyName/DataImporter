@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import './style.scss'
 import { MapFieldsPanel } from '../mapfields'
+import { UploadMigrationInputFile } from '../../api/file/fileApi'
 
 export interface SelectInputPanelInfo {
   migrationDetails?: DataMigrationDetails
@@ -16,26 +17,33 @@ export const SelectInputPanel: React.FC<PanelProps<SelectInputPanelInfo>> = prop
   const [isNextPageAllowed, setIsNextPageAllowed] = React.useState<boolean>(false)
   const defaultFileName: string = "Choose migration input file..."
   const [selectedFileName, setSelectedFileName] = React.useState<string>(defaultFileName)
+  const [selectedFileId, setSelectedFileId] = React.useState<string>("")
   const [selectedFile, setSelectedFile] = React.useState<File | undefined>()
   
   const onImportTypeChange = React.useCallback((event: React.FormEvent<HTMLInputElement>) => {
     setSelectedImportType(event.currentTarget.value)
   }, [])
 
-  const onFileSelectionChange = React.useCallback((event: React.FormEvent<HTMLInputElement>) => {
+  const onFileSelectionChange = React.useCallback(async (event: React.FormEvent<HTMLInputElement>) => {
     setSelectedFileName(event.currentTarget.value.split("\\").pop() ?? defaultFileName)
     setSelectedFile(event.currentTarget.files?.[0])
-    setIsNextPageAllowed(event.currentTarget.value !== "")
+
+    if (!event.currentTarget.value) {
+      return
+    }
+
+    const fileId = `file-${selectedImportType}-${uuidv4()}`
+    setSelectedFileId(fileId)
+    await UploadMigrationInputFile(fileId, event.currentTarget.files?.[0])
+    setIsNextPageAllowed(true)
   }, [])
 
   const onNextPageClick = React.useCallback(() => {
     if (selectedFile !== undefined) {
-      // api call to get all schema detail to pass to next panel
-      const fileId = `file-${selectedImportType}-${uuidv4()}`
       props.openPanel({
         props: {
           migrationDetails: {
-            id: fileId,
+            id: selectedFileId,
             type: selectedImportType,
             fileName: selectedFile.name,
             file: selectedFile
