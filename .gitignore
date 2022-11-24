@@ -16,15 +16,15 @@ tests/*/obj
 
 
 # dependencies
-src/*/node_modules
-src/*/.pnp
+src/simple-data-import-app/node_modules
+/.pnp
 .pnp.js
 
 # testing
-src/*/coverage
+src/simple-data-import-app/coverage
 
 # production
-src/*/build
+src/simple-data-import-app/build
 
 # misc
 .DS_Store
